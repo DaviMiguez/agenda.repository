@@ -5,20 +5,20 @@ import requests
 
 
 class Contato(models.Model):
-    nome = models.CharField(max_length=200)
-    telefone = models.CharField(max_length=11)
-    email = models.EmailField()
-    data_criacao = models.DateTimeField(auto_now=True)
+    nome = models.CharField(max_length=200, verbose_name='Nome')
+    telefone = models.CharField(max_length=11, verbose_name='Telefone')
+    email = models.EmailField(verbose_name='E-mail')
+    data_criacao = models.DateTimeField(auto_now=True, verbose_name='Data de criação')
 
     def __str__(self):
         return self.nome
 
 class Evento(models.Model):
-    titulo = models.CharField(max_length=100)
-    descricao = models.TextField(blank=True, null=True)
-    data_evento = models.DateTimeField()
-    data_criacao = models.DateTimeField(auto_now=True)
-    contato = models.ForeignKey(Contato, on_delete=models.PROTECT)
+    titulo = models.CharField(max_length=100, verbose_name='Título')
+    descricao = models.TextField(blank=True, null=True, verbose_name='Descrição')
+    data_evento = models.DateTimeField(verbose_name='Data do evento')
+    data_criacao = models.DateTimeField(auto_now=True, verbose_name='Data de criação')
+    contato = models.ForeignKey(Contato, on_delete=models.PROTECT, verbose_name='Contato')
     # usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
@@ -29,11 +29,11 @@ class Evento(models.Model):
         return self.titulo
 
 class Endereco(models.Model):
-    cep = models.CharField(max_length=10)
-    logradouro = models.CharField(max_length=200, verbose_name='rua')
-    bairro = models.CharField(max_length=200)
-    cidade = models.CharField(max_length=200)
-    contato = models.ForeignKey(Contato, on_delete=models.PROTECT)
+    cep = models.CharField(max_length=10, verbose_name='Cep')
+    logradouro = models.CharField(max_length=200, verbose_name='Rua')
+    bairro = models.CharField(max_length=200, verbose_name='Bairro')
+    cidade = models.CharField(max_length=200, verbose_name='Cidade')
+    contato = models.ForeignKey(Contato, on_delete=models.PROTECT, verbose_name='Contato')
 
     def __str__(self):
         return f'{self.contato}'
